@@ -36,8 +36,15 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    # "core",   # <- cuando crees la app de prueba, descoméntalo
+    
+    # APPS CREADAS POR EL GRUPO
+    'seguridad',
+    'actores',
+    'documentos',
+    'casos',
 ]
+
+AUTH_USER_MODEL = 'seguridad.Usuario'
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
