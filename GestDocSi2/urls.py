@@ -20,6 +20,9 @@ from django.contrib.auth import views as auth_views
 from portal.views import home
 
 urlpatterns = [
+    
+    #GESTION DE USUARIOS Y AUTENTICACION
+    
     path("admin/", admin.site.urls),
     path("", home, name="home"),
     path("login/", auth_views.LoginView.as_view(template_name="registration/login.html"), name="login"),
@@ -27,5 +30,11 @@ urlpatterns = [
     path("panel/", include("dashboard.urls")),
     path("accounts/", include("accounts.urls", namespace="accounts")),
     path("chat/", include("chat.urls", namespace="chat")),
+    
+    
+    #GESTION DE CASOS
+    
+    path("casos/", include("casos.urls", namespace="casos")),
+
     
 ]
