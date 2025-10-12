@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'documentos',
     'casos',
     'portal',
+    'dashboard',
+    'accounts',
 ]
 
 AUTH_USER_MODEL = 'seguridad.Usuario'
@@ -102,3 +104,7 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# Redirecciones después de login/logout
+LOGIN_REDIRECT_URL = 'dashboard:panel'   
+LOGOUT_REDIRECT_URL = 'home'

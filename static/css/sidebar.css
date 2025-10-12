@@ -1,0 +1,232 @@
+/* =========================
+   Sidebar layout (responsive)
+   ========================= */
+
+/* --- Variables básicas --- */
+:root{
+  --sidebar-w: 300px;
+  --bg-page: #fcfcfc;
+  --bg-sidebar: #fff;
+  --bg-hover: #fcfcfc;
+  --brand: #ff7315;
+  --text: #000;
+  --text-soft: #8b8b8b;
+  --border: #efefef;
+}
+
+/* --- Base --- */
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body{
+  font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, "Noto Sans", sans-serif;
+  background-color: var(--bg-page);
+  color: var(--text);
+  position: relative;
+  margin: 0;
+}
+
+/* Overlay (solo móvil/tablet) */
+body::before{
+  content:"";
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.5);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .25s ease, visibility .25s ease;
+  z-index: 1000;
+}
+body.show-sidebar::before{
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Sección principal */
+.site-section{ padding: 2.5rem 0; }
+
+/* Asegurar alturas completas */
+aside, main{ min-height: 100dvh; }
+
+/* =========================
+   SIDEBAR (mobile-first: off-canvas)
+   ========================= */
+aside.sidebar{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-w);
+  height: 100dvh;
+  background: var(--bg-sidebar);
+  z-index: 1001;
+  transform: translateX(-100%);
+  transition: transform .35s cubic-bezier(0.23, 1, 0.32, 1), box-shadow .25s ease;
+  box-shadow: none;
+  will-change: transform;
+}
+
+/* Mostrar cuando body tiene show-sidebar (móvil/tablet) */
+.show-sidebar aside.sidebar{
+  transform: translateX(0);
+  box-shadow: 10px 0 30px rgba(0,0,0,.12);
+}
+
+/* Botón burger (pega al borde) */
+aside .toggle{
+  position: absolute;
+  right: 0;
+  transform: translateX(100%);
+  padding: 1rem;
+  top: .75rem;
+}
+
+/* Contenedor interno con scroll */
+aside .side-inner{
+  height: 100%;
+  padding: 30px 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Profile */
+aside .profile{
+  text-align: center;
+  padding: 0 30px 30px;
+  margin-bottom: 30px;
+  border-bottom: 1px solid var(--border);
+}
+aside .profile img{
+  width: 80px; height: 80px; object-fit: cover;
+  border-radius: 50%;
+  display: block; margin: 0 auto 15px;
+}
+aside .profile .name{ font-size: 18px; margin: 0 0 2px; }
+aside .profile .country{ font-size: 14px; color: #cfcfcf; }
+
+/* Nav */
+.nav-menu ul, .nav-menu li{ list-style: none; margin: 0; padding: 0; }
+.nav-menu a{
+  display: block;
+  padding: 10px 30px;
+  color: var(--text-soft);
+  position: relative;
+  transition: padding-left .2s ease, background .2s ease, color .2s ease;
+}
+.nav-menu a:hover{
+  background: var(--bg-hover);
+  color: var(--text);
+}
+.nav-menu a::before{
+  content:"";
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 0;
+  background: var(--brand);
+  opacity: 0; visibility: hidden;
+  transition: width .2s ease, opacity .2s ease, visibility .2s ease;
+}
+.nav-menu a:hover::before{ width: 4px; opacity:1; visibility: visible; }
+
+/* Item activo */
+.nav-menu li.active > a{
+  background: var(--bg-hover);
+  color: var(--text);
+}
+.nav-menu li.active > a::before{ width: 4px; opacity:1; visibility: visible; }
+
+/* Collapsibles (flecha con FA6) */
+.nav-menu a.collapsible{
+  padding-right: 48px; /* espacio para flecha */
+}
+.nav-menu a.collapsible::after{
+  content: "\f105"; /* angle-right */
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  position: absolute;
+  right: 20px; top: 50%;
+  transform: translateY(-50%);
+  line-height: 1;
+  transition: transform .2s ease;
+}
+.nav-menu a.collapsible[aria-expanded="true"]{
+  background: var(--bg-hover);
+  color: var(--text);
+}
+.nav-menu a.collapsible[aria-expanded="true"]::before{
+  width: 4px; opacity:1; visibility: visible;
+}
+.nav-menu a.collapsible[aria-expanded="true"]::after{
+  transform: translateY(-50%) rotate(90deg);
+}
+
+/* =========================
+   MAIN (content)
+   ========================= */
+main{
+  width: 100%;
+  transition: transform .35s cubic-bezier(0.23, 1, 0.32, 1), margin-left .35s cubic-bezier(0.23, 1, 0.32, 1);
+  will-change: transform, margin-left;
+}
+.show-sidebar main{
+  transform: translateX(var(--sidebar-w));
+}
+
+/* =========================
+   DESKTOP (≥ 992px)
+   - Sidebar fijo siempre visible
+   - El contenido corre a la derecha
+   ========================= */
+@media (min-width: 992px){
+  /* Sin overlay en desktop */
+  body::before{ display: none; }
+
+  /* Sidebar siempre visible */
+  aside.sidebar{
+    transform: none !important;
+    box-shadow: 10px 0 30px rgba(0,0,0,.06);
+  }
+
+  /* Oculta el toggle externo si no lo necesitas en desktop */
+  aside .toggle{ display: none; }
+
+  /* El contenido deja margen izquierdo fijo */
+  main{
+    margin-left: var(--sidebar-w);
+    transform: none !important;
+  }
+
+  /* Más aire al contenido grande */
+  .site-section{ padding: 3rem 0; }
+}
+
+/* =========================
+   ACCESIBILIDAD / PULIDO
+   ========================= */
+a, button{ outline-offset: 2px; }
+.burger{
+  width: 28px; height: 32px; position: relative; cursor: pointer; z-index: 1100;
+}
+.burger::before, .burger span, .burger::after{
+  content:""; position: absolute; left: 0; right: 0; height: 2px;
+  background: #000; border-radius: 2px;
+  transition: top .2s ease, transform .2s ease, opacity .2s ease;
+}
+.burger::before{ top: 6px; }
+.burger span{ top: 15px; }
+.burger::after{ top: 24px; }
+.burger.active span{ opacity: 0; }
+.burger.active::before{ top: 15px; transform: rotate(45deg); }
+.burger.active::after{ top: 15px; transform: rotate(-45deg); }
+
+/* Scrollbar fino (opc.) */
+aside .side-inner{
+  scrollbar-width: thin;
+  scrollbar-color: #ddd transparent;
+}
+aside .side-inner::-webkit-scrollbar{ width: 8px; }
+aside .side-inner::-webkit-scrollbar-track{ background: transparent; }
+aside .side-inner::-webkit-scrollbar-thumb{ background: #ddd; border-radius: 4px; }
+
+/* Respeto a usuarios con reducción de movimiento */
+@media (prefers-reduced-motion: reduce){
+  *{ transition: none !important; }
+}

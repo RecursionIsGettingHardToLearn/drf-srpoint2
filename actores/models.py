@@ -12,6 +12,10 @@ class Actor(models.Model):
         ("ASI", "Asistente"),
     )
 
+    ESTADOS = (
+        ("ACTIVO", "Activo"),
+        ("INACTIVO", "Inactivo"),
+    )
     # 1–a–1/única con Usuario (tu mapeo: idUsuario → Usuario(id))
     usuario = models.OneToOneField(
         settings.AUTH_USER_MODEL,
@@ -26,7 +30,7 @@ class Actor(models.Model):
     ci = models.CharField(max_length=30, unique=True)        # usualmente único
     telefono = models.CharField(max_length=30, blank=True)
     direccion = models.TextField(blank=True)
-    estadoActor = models.CharField(max_length=20, default="ACTIVO")
+    estadoActor = models.CharField(max_length=20, choices=ESTADOS, default="ACTIVO")
 
     creadoEn = models.DateTimeField(auto_now_add=True)
     actualizadoEn = models.DateTimeField(auto_now=True)

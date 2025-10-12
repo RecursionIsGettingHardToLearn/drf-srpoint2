@@ -52,7 +52,7 @@ class UsuarioRol(models.Model):
     """
     usuario = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, db_index=True)
     rol = models.ForeignKey(Rol, on_delete=models.CASCADE, db_index=True)
-    fechaAsignacion = models.DateField()
+    fechaAsignacion = models.DateField(auto_now_add=True) 
 
     class Meta:
         unique_together = (("usuario", "rol"),)
