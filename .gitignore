@@ -7,7 +7,7 @@ __pycache__/
 # Entornos
 env/
 .venv/
-
+venv/
 # Django runtime
 db.sqlite3
 media/

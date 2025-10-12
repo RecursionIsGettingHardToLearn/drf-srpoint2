@@ -21,7 +21,7 @@ environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env("SECRET_KEY", default="change-me")   # nunca dejes una real aquí
 DEBUG = env.bool("DEBUG", default=False)
-ALLOWED_HOSTS = [h.strip() for h in env("ALLOWED_HOSTS", default="127.0.0.1,localhost").split(",")]
+ALLOWED_HOSTS = [h.strip() for h in env("ALLOWED_HOSTS", default="127.0.0.1,localhost,testserver").split(",")]
 
 
 # Application definition
@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'portal',
     'dashboard',
     'accounts',
+    'chat',
 ]
 
 AUTH_USER_MODEL = 'seguridad.Usuario'

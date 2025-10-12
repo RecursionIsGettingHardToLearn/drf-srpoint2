@@ -159,6 +159,11 @@
   <script src="{% static 'js/sidebar.js' %}"></script>
 
   {% block extra_js %}{% endblock %}
+
+  <!-- Chat Widget Flotante (solo para usuarios autenticados) -->
+  {% if user.is_authenticated %}
+    {% include 'chat/chat_widget.html' %}
+  {% endif %}
 </body>
 
 </html>
