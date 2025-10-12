@@ -116,15 +116,10 @@
             </button>
             <div id="menuCasos" class="collapse">
               <ul class="list-unstyled ps-3">
-                <li><a href="#" class="text-white text-decoration-none">Casos</a></li>
-                <li><a href="#" class="text-white text-decoration-none">Vista de Casos</a></li>
+                <li><a href="{% url 'casos:case_list' %}" class="text-white text-decoration-none">Lista de Casos</a></li>
+                <li><a href="{% url 'casos:case_create' %}" class="text-white text-decoration-none">Nuevo Caso</a></li>
                 <li><a href="#" class="text-white text-decoration-none">Expedientes</a></li>
-                <li>
-                  <a class="nav-link text-white" href="{% url 'dashboard:panel' %}">
-                    <i class="fa fa-home me-2"></i> Dashboard
-                  </a>
-                </li>
-
+              
                 <li><a href="#" class="text-white text-decoration-none">Vista de
                     Expedientes</a></li>
               </ul>

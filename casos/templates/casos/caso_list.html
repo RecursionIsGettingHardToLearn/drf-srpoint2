@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}Listado de Casos{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <h3 class="mb-3">Gestión de Casos</h3>
+  <a href="{% url 'casos:case_create' %}" class="btn btn-primary mb-3">Nuevo Caso</a>
+
+  <table class="table table-bordered table-hover">
+    <thead class="thead-light">
+      <tr>
+        <th>#</th>
+        <th>Nro Caso</th>
+        <th>Tipo</th>
+        <th>Estado</th>
+        <th>Prioridad</th>
+        <th>Inicio</th>
+        <th class="text-center">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for caso in casos %}
+      <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ caso.nroCaso }}</td>
+        <td>{{ caso.tipoCaso }}</td>
+        <td>{{ caso.estado }}</td>
+        <td>{{ caso.prioridad }}</td>
+        <td>{{ caso.fechaInicio }}</td>
+        <td class="text-center">
+          <a href="{% url 'casos:case_edit' caso.id %}" class="btn btn-sm btn-warning">Editar</a>
+          <a href="{% url 'casos:equipo_list' caso.id %}" class="btn btn-sm btn-info">Equipo</a>
+          <a href="{% url 'casos:parte_list' caso.id %}" class="btn btn-sm btn-secondary">Partes</a>
+        </td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="7" class="text-center">No hay casos registrados.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

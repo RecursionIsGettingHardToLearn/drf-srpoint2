@@ -1,5 +1,6 @@
 from django.db import models
 from actores.models import Actor, Cliente
+from seguridad.models import Usuario
 
 # Create your models here.
 
