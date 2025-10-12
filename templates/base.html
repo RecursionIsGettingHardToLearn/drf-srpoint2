@@ -52,6 +52,11 @@
 
           <!-- Usuarios -->
           <li class="mb-2">
+            <a href="{% url 'dashboard:panel' %}" class="btn w-100 text-start text-white">
+              <i class="fa fa-user-shield me-2"></i> Dashboard
+            </a>
+
+
             <button class="btn w-100 text-start text-white" type="button" data-bs-toggle="collapse"
               data-bs-target="#menuUsuarios">
               <i class="fa fa-user-shield me-2"></i> Gestionar Usuarios
@@ -62,7 +67,8 @@
                 <li><a href="{% url 'accounts:user_list' %}" class="text-white text-decoration-none">Usuarios</a></li>
                 <li><a href="{% url 'accounts:user_create' %}" class="text-white text-decoration-none">Crear
                     Usuarios</a></li>
-                <li><a href="{% url 'accounts:actors_list' %}" class="text-white text-decoration-none">Lista de Actores</a></li>
+                <li><a href="{% url 'accounts:actors_list' %}" class="text-white text-decoration-none">Lista de
+                    Actores</a></li>
               </ul>
             </div>
           </li>
@@ -77,10 +83,8 @@
               <ul class="list-unstyled ps-3">
                 <li><a href="#" class="text-white text-decoration-none">Lista de
                     Clientes</a></li>
-                <li><a href="#"
-                    class="text-white text-decoration-none">Nuevo Cliente - Persona</a></li>
-                <li><a href="#"
-                    class="text-white text-decoration-none">Nuevo Cliente - Empresa</a></li>
+                <li><a href="#" class="text-white text-decoration-none">Nuevo Cliente - Persona</a></li>
+                <li><a href="#" class="text-white text-decoration-none">Nuevo Cliente - Empresa</a></li>
               </ul>
             </div>
           </li>
@@ -117,8 +121,8 @@
                 <li><a href="#" class="text-white text-decoration-none">Expedientes</a></li>
                 <li>
                   <a class="nav-link text-white" href="{% url 'dashboard:panel' %}">
-                  <i class="fa fa-home me-2"></i> Dashboard
-                </a>
+                    <i class="fa fa-home me-2"></i> Dashboard
+                  </a>
                 </li>
 
                 <li><a href="#" class="text-white text-decoration-none">Vista de
