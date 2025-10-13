@@ -1,0 +1,128 @@
+
+Usuario (AbstractUser)
+├── Administrador (OneToOne) yes
+├── Personal (OneToOne) yes
+├── Propietario (OneToOne) yes
+├── Inquilino (OneToOne)
+└── Residente (OneToOne relacionado)
+
+python manage.py show_urls
+python manage.py makemigrations
+python manage.py migrate
+
+
+pip install django-cors-headers
+pip install djangorestframework-simplejwt
+pip install psycopg2-binary
+pip install python-decouple
+
+django-admin startproject nombre_del_proyecto
+cd nombre_del_proyecto
+python manage.py startapp app
+
+
+
+python manage.py createsuperuser
+
+
+# mmodficacion
+from datetime import timedelta
+
+SIMPLE_JWT = {
+    # Tiempo de vida del token de acceso: 30 minutos
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),
+
+    # Tiempo de vida del token de refresh: 1 día
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+
+    # Si se rota el refresh token, generar uno nuevo y descartar el anterior
+    'ROTATE_REFRESH_TOKENS': True,
+    'BLACKLIST_AFTER_ROTATION': True,
+
+    # Cabecera esperada: "Authorization: Bearer <token>"
+    'AUTH_HEADER_TYPES': ('Bearer',),
+
+    # Solo se aceptan AccessTokens para autenticación
+    'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
+}
+
+python -m venv venv
+venv\Scripts\Activate
+
+
+lNSTRUCCIONES:
+1.leer models.ts donde se encunta als interface,
+
+
+# settings.py
+REST_FRAMEWORK = {
+    "EXCEPTION_HANDLER": "app.exceptions.custom_exception_handler"
+}
+
+#Estandariza siempre { "error": { "message", "code", "fields" } }. Evita filtrar datos sensibles.
+
+
+
+venv\Scripts\Activate
+cd drf_p1_backend
+python manage.py runserver
+
+#branch
+git branch
+
+git checkout -b redireccionar-exitoso
+git add .
+git commit -m "s"
+git push -u origin main
+https://e153c382858a.ngrok-free.app 
+
+#freeze 
+pip freeze > requirements.txt 
+dj-database-url==2.1.0
+
+#only valida for the app 
+cd drf_p1_backend
+python manage.py runserver 
+
+
+
+
+
+from rest_framework import permissions
+
+class IsAdministrador(permissions.BasePermission):
+    def has_permission(self, request, view):
+        return request.user and request.user.is_superuser
+
+class IsCliente(permissions.BasePermission):
+    def has_permission(self, request, view):
+        return request.user and request.user.rol.nombre == 'Cliente'
+
+class IsPersonal(permissions.BasePermission):
+    def has_permission(self, request, view):
+        return request.user and request.user.rol.nombre == 'Personal'        
+
+
+"username": "admin","password":"angel2025,"
+
+[System.Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes((Get-Content -Path "proyecto2-2025-cef6c7dd9580.json" -Raw))) | Set-Content -Path "proyecto2-base64.txt" -Encoding UTF8
+
+
+
+
+DB_NAME=db_si2p1
+DB_USER=postgres
+DB_PASSWORD=postgres
+DB_HOST=localhost
+DB_PORT=5432
+
+
+DJANGO_ALLOWED_HOSTS=localhost,127.0.0.1,192.168.1.50,tercerproyectosi1react.onrender.comdr
+
+
+#idrivee
+pip install boto3 django-storages
+#filter
+pip install django-filter
+pip install whitenoise
+
