@@ -31,5 +31,5 @@ urlpatterns = [
     path("actors/<int:actor_id>/cliente/", views.cliente_create, name="cliente_create"),
     path("actors/<int:actor_id>/asistente/", views.asistente_create, name="asistente_create"),
 
-    
 ]
+

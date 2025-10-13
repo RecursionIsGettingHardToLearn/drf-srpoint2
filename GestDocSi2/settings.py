@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 import environ, os
 from pathlib import Path
+from datetime import timedelta
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -34,8 +35,9 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+
     
-    # APPS CREADAS POR EL GRUPO
+
     'seguridad',
     'actores',
     'documentos',
@@ -44,11 +46,24 @@ INSTALLED_APPS = [
     'dashboard',
     'accounts',
     'chat',
+
+    'rest_framework',
+    'django_filters',
+
+    'corsheaders',
+    'rest_framework_simplejwt',
+    'rest_framework_simplejwt.token_blacklist',
 ]
 
+#CSRF_COOKIE_SECURE = True  # Solo si estás usando HTTPS
+#CSRF_COOKIE_HTTPONLY = True
 AUTH_USER_MODEL = 'seguridad.Usuario'
 
 MIDDLEWARE = [
+     'corsheaders.middleware.CorsMiddleware',  # Debe ir lo más arriba posible!
+    'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware', # Para servir estáticos en producción
+
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -59,7 +74,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "GestDocSi2.urls"
-
+CORS_ALLOW_ALL_ORIGINS = True
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
@@ -74,7 +89,10 @@ TEMPLATES = [
         },
     },
 ]
-
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:8000',  # Asegúrate de que tu frontend está incluido aquí
+    'https://c270a31038e7.ngrok-free.app',  # Si usas HTTPS en producción
+]
 WSGI_APPLICATION = "GestDocSi2.wsgi.application"
 ASGI_APPLICATION = "GestDocSi2.asgi.application"
 
@@ -89,6 +107,34 @@ DATABASES = {
         "PORT": env("DB_PORT", default="5432"),
     }
 }
+# --- JWT (JSON Web Token) Configuration ---
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(weeks=5),   # Ejemplo: 5 semanas (considera si es apropiado para tu caso)
+    'REFRESH_TOKEN_LIFETIME': timedelta(weeks=7),     # Ejemplo: 7 semanas (considera si es apropiado para tu caso)
+
+    # Si se rota el refresh token, generar uno nuevo y descartar el anterior
+    'ROTATE_REFRESH_TOKENS': True,
+    'BLACKLIST_AFTER_ROTATION': True,
+
+    # Cabecera esperada: "Authorization: Bearer <token>"
+    'AUTH_HEADER_TYPES': ('Bearer',),
+
+    # Solo se aceptan AccessTokens para autenticación
+    'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
+}
+# --- Django REST Framework Configuration ---
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated', # Por defecto, requiere autenticación
+    ),
+    'DEFAULT_FILTER_BACKENDS': (
+        'django_filters.rest_framework.DjangoFilterBackend',  # Habilitar filtrado
+    ),
+}
+
 
 # Idioma y zona
 LANGUAGE_CODE = env("LANGUAGE_CODE", default="es")
@@ -109,3 +155,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # Redirecciones después de login/logout
 LOGIN_REDIRECT_URL = 'dashboard:panel'   
 LOGOUT_REDIRECT_URL = 'home'
+# En tu archivo settings.p
+
+CSRF_COOKIE_NAME = "csrftoken"
+CSRF_COOKIE_SECURE = False 

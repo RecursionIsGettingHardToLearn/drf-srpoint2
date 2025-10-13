@@ -30,7 +30,7 @@ urlpatterns = [
     path("panel/", include("dashboard.urls")),
     path("accounts/", include("accounts.urls", namespace="accounts")),
     path("chat/", include("chat.urls", namespace="chat")),
-    
+     path("seguridad/", include("seguridad.urls", namespace="seguridades")),
     
     #GESTION DE CASOS
     

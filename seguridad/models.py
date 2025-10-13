@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.conf import settings
+from django.utils import timezone
 
 # ==========================
 # USUARIO (CustomUser)
@@ -90,9 +91,9 @@ class Bitacora(models.Model):
     # === Según tu mapeo (NO tocar nombres) ===
     login = models.CharField(max_length=100)       
     ip = models.GenericIPAddressField(null=True, blank=True)  
-    userAgent = models.TextField(blank=True)
-    fecha = models.DateTimeField()                 
-    login_at = models.DateTimeField(null=True, blank=True)    # hora de inicio de sesión (si aplica)
+    userAgent = models.TextField(null=True, blank=True)
+    fecha = models.DateTimeField(null=True, blank=True)                 
+    login_at = models.DateTimeField(default=timezone.now)    # hora de inicio de sesión (si aplica)
     logout_at = models.DateTimeField(null=True, blank=True)   # hora de cierre (si aplica)
     device = models.CharField(max_length=255, null=True, blank=True)
 

@@ -3,7 +3,7 @@ from django.contrib import messages
 from .models import Caso
 from .forms import CasoForm, EquipoCasoForm, ParteProcesalForm
 from actores.models import Actor, Cliente
-
+from rest_framework import viewsets
 def caso_list(request):
     casos = Caso.objects.all().order_by("-fechaInicio")
     return render(request, "casos/caso_list.html", {"casos": casos})
@@ -74,3 +74,48 @@ def parte_procesal_add(request, caso_id):
     else:
         form = ParteProcesalForm()
     return render(request, "casos/parte_form.html", {"form": form, "caso": caso})
+
+#CasoViewSet
+
+from .models import Caso
+from .serializers import CasoSerializer
+
+class CasoViewSet(viewsets.ModelViewSet):
+    queryset = Caso.objects.all()
+    serializer_class = CasoSerializer
+
+#EquipoCasoViewSet
+from rest_framework import viewsets
+from .models import EquipoCaso
+from .serializers import EquipoCasoSerializer
+
+class EquipoCasoViewSet(viewsets.ModelViewSet):
+    queryset = EquipoCaso.objects.all()
+    serializer_class = EquipoCasoSerializer
+
+#ParteProcesalViewSet
+from rest_framework import viewsets
+from .models import ParteProcesal
+from .serializers import ParteProcesalSerializer
+
+class ParteProcesalViewSet(viewsets.ModelViewSet):
+    queryset = ParteProcesal.objects.all()
+    serializer_class = ParteProcesalSerializer
+
+#ExpedienteViewSet
+from rest_framework import viewsets
+from .models import Expediente
+from .serializers import ExpedienteSerializer
+
+class ExpedienteViewSet(viewsets.ModelViewSet):
+    queryset = Expediente.objects.all()
+    serializer_class = ExpedienteSerializer
+
+#CarpetaViewSet
+from rest_framework import viewsets
+from .models import Carpeta
+from .serializers import CarpetaSerializer
+
+class CarpetaViewSet(viewsets.ModelViewSet):
+    queryset = Carpeta.objects.all()
+    serializer_class = CarpetaSerializer

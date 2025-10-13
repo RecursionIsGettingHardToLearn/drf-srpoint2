@@ -357,3 +357,31 @@ def obtener_sugerencias(request):
         
     except Exception as e:
         return JsonResponse({'error': f'Error interno: {str(e)}'}, status=500)
+from rest_framework import viewsets
+from .models import Conversacion
+from .serializers import ConversacionSerializer
+
+class ConversacionViewSet(viewsets.ModelViewSet):
+    queryset = Conversacion.objects.all()
+    serializer_class = ConversacionSerializer
+from rest_framework import viewsets
+from .models import Mensaje
+from .serializers import MensajeSerializer
+
+class MensajeViewSet(viewsets.ModelViewSet):
+    queryset = Mensaje.objects.all()
+    serializer_class = MensajeSerializer
+from rest_framework import viewsets
+from .models import ConsultaDocumento
+from .serializers import ConsultaDocumentoSerializer
+
+class ConsultaDocumentoViewSet(viewsets.ModelViewSet):
+    queryset = ConsultaDocumento.objects.all()
+    serializer_class = ConsultaDocumentoSerializer
+from rest_framework import viewsets
+from .models import ConfiguracionIA
+from .serializers import ConfiguracionIASerializer
+
+class ConfiguracionIAViewSet(viewsets.ModelViewSet):
+    queryset = ConfiguracionIA.objects.all()
+    serializer_class = ConfiguracionIASerializer
