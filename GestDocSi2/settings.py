@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'dashboard',
     'accounts',
     'chat',
-
+    'whitenoise.runserver_nostatic',
     'rest_framework',
     'django_filters',
 
