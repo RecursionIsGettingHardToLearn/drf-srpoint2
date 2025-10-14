@@ -69,6 +69,9 @@ python manage.py runserver
 
 #branch
 git branch
+#remove origin 
+git remote remove origin
+
 
 git checkout -b redireccionar-exitoso
 git add .
