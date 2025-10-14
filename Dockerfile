@@ -63,13 +63,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # Copiamos el venv ya construido
 COPY --from=builder /venv /venv
-
+# Crea usuario no-root
+RUN adduser --disabled-password --gecos "" appuser
 # ---- FIX STATICFILES PERMISSIONS ----
 # Create the staticfiles directory and give appuser ownership
 RUN mkdir -p /app/staticfiles \
     && chown -R appuser:appuser /app/staticfiles
-# Crea usuario no-root
-RUN adduser --disabled-password --gecos "" appuser
+
 USER appuser
 
 # Copia el código de la app
