@@ -9,6 +9,6 @@ python manage.py create_default_superuser
 # Collect static files
 python manage.py collectstatic --no-input
 
-# Start the Gunicorn server
+# Start the Gunicorn server debe ser el nombre de la carpeta donde está tu archivo wsgi.py.
 # ¡CAMBIO AQUÍ! Ahora enlaza con 0.0.0.0:8080
-gunicorn drf_p1_backend.wsgi:application --bind 0.0.0.0:8080
+gunicorn GestDocSi2.wsgi:application --bind 0.0.0.0:8080
