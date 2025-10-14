@@ -89,7 +89,8 @@ TEMPLATES = [
         },
     },
 ]
-CSRF_TRUSTED_Oacalhost:8000',  # Asegúrate de que tu frontend está incluido aquí
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:8000',  # Asegúrate de que tu frontend está incluido aquí
     'https://c270a31038e7.ngrok-free.app',  # Si usas HTTPS en producción
 ]
 WSGI_APPLICATION = "GestDocSi2.wsgi.application"
