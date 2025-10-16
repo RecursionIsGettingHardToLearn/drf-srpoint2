@@ -129,3 +129,8 @@ pip install boto3 django-storages
 pip install django-filter
 pip install whitenoise
 
+
+{
+    "refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc2NDgwMjI2NCwiaWF0IjoxNzYwNTY4NjY0LCJqdGkiOiJkOTRjNTdjOTBjZTY0ZTA1ODMzMDU4MjEyOGVhZGJjNiIsInVzZXJfaWQiOiIxIn0.HSZV_sOFD26s6LH3vZkI8j6ZHC3ZgYd_ULDdJz2siwQ",
+    "access": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzYzNTkyNjY0LCJpYXQiOjE3NjA1Njg2NjQsImp0aSI6ImFlMzM3YmFhN2I2NTRlMDVhMmQyZmFkOGE3MTllMTA3IiwidXNlcl9pZCI6IjEifQ.L7_8jNqGfhFBECFl-pf6r1aHBFce5dcLBc92BFv6Mx4"
+}
